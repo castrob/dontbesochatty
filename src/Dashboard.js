@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 
+import {CTX} from './Store';
+
 const useStyles = makeStyles(theme => ({
     root: {
         margin: '50px',
@@ -41,6 +43,14 @@ export default function Dashboard () {
 
     const classes = useStyles();
 
+    // CTX Store
+    const [allChats] = React.useContext(CTX);
+
+    const topics = Object.keys(allChats);
+
+    
+    // local state
+    const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
     const [textValue, changeTextValue] = React.useState('');
 
     return( 
@@ -50,14 +60,14 @@ export default function Dashboard () {
                     Don't be so Chatty
                 </Typography>
                 <Typography variant="h5" component="h5">
-                    Session placeholder
+                    {activeTopic}
                 </Typography>
                 <div className={classes.flex}>
                     <div className={classes.topicsWindow}>
                         <List>
                             {
-                                ['Felipe megale', 'Guilherme Galvão', 'João Castro'].map(topic => (
-                                    <ListItem key={topic} button>    
+                               topics.map(topic => (
+                                    <ListItem onClick={e => changeActiveTopic(e.target.innerText)} key={topic} button>    
                                         <ListItemText primary={topic} />
                                     </ListItem>                                    
                                 ))
@@ -66,10 +76,10 @@ export default function Dashboard () {
                     </div>
                     <div className={classes.chatWindow}>
                         {
-                            [{from: 'Felipe Megale', msg: 'Hello'}].map((chat, i) => (
+                            allChats[activeTopic].map((chat, i) => (
                                 <div className={classes.flex} key={i}>
                                     <Chip label={chat.from} className={classes.chip} />
-                                    <Typography variant="p" > {chat.msg} </Typography>
+                                    <Typography variant="body1" gutterBottom> {chat.msg} </Typography>
                                 </div>                    
                             ))
                         }
