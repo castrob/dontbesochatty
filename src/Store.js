@@ -1,5 +1,7 @@
 import React from 'react';
+import io from 'socket.io-client';
 
+// internal context
 export const CTX = React.createContext();
 
 /*
@@ -22,18 +24,13 @@ export const CTX = React.createContext();
     }
 */
 
+// Initial state, with at least two topics
 const initState = {
-    general: [
-        {from: 'Megale', msg: 'Eai'},
-        {from: 'Galvão', msg: 'Opa'},
-        {from: 'Castro', msg: 'fala'}
-    ],
-    topic2: [
-        {from: 'Megale', msg: 'hello'},
-        {from: 'Galvão', msg: 'hi'}
-    ]
+    general: [],
+    work: []
 }
 
+// reducer must append new messages when receive_message is called as action
 function reducer(state, action) {
 
     const {from, msg, topic} = action.payload;
@@ -55,13 +52,33 @@ function reducer(state, action) {
     }
 }
 
+// io socket client
+let socket;
+
+// this action is performed on dashboard and sends the message to server
+function sendChatAction(value) {
+    socket.emit('chat message', value)
+}
 
 export default function Store(props) {
 
-    const reducerHook = React.useReducer(reducer, initState);
+    const [allChats, dispatch] = React.useReducer(reducer, initState);
 
+    // initiate the socket 
+    if(!socket){
+        socket = io(':3001');
+        socket.on('chat message', function(msg) {
+            dispatch({type: 'RECEIVE_MESSAGE', payload: msg})            
+          });
+    }
+
+    // just a workaround, do it better later. 
+    const user = 'Castro' + Math.random(100).toFixed(2)
+
+
+    // good luck as well 
     return ( 
-        <CTX.Provider value={reducerHook}> 
+        <CTX.Provider value={{allChats, sendChatAction, user}}> 
             {props.children}
         </CTX.Provider>
     )

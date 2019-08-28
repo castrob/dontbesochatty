@@ -41,18 +41,21 @@ const useStyles = makeStyles(theme => ({
 
 export default function Dashboard () {
 
+    // stuff for interface implementation
     const classes = useStyles();
 
     // CTX Store
-    const [allChats] = React.useContext(CTX);
+    const {allChats, sendChatAction, user} = React.useContext(CTX);
 
-    const topics = Object.keys(allChats);
+    // List of topics that arrives from Context
+    const topics = Object.keys(allChats); 
 
     
     // local state
-    const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
-    const [textValue, changeTextValue] = React.useState('');
+    const [activeTopic, changeActiveTopic] = React.useState(topics[0]); // Starts with the first topic as default (general)
+    const [textValue, changeTextValue] = React.useState(''); // State to handle the send text action
 
+    // good luck understanding this crap
     return( 
         <div>
             <Paper className={classes.root}>
@@ -93,7 +96,17 @@ export default function Dashboard () {
                     value={textValue}
                     onChange={e => changeTextValue(e.target.value)}
                 />
-                <Button variant="contained" color="primary" className={classes.button}> send </Button>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    className={classes.button}
+                    onClick={() => {
+                        sendChatAction({from: user, msg:textValue, topic: activeTopic});
+                        changeTextValue('');
+                    }}
+                    >
+                        Send 
+                    </Button>
                 </div>
             </Paper>
         </div> 

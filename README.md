@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## Installations
+ - npm install --save socket.io
+ - npm install --save socket.io-client
+ - npm install --save express@4.15.2
+ - npm install @material-ui/core
+
+
 ## Available Scripts
 
 In the project directory, you can run:
