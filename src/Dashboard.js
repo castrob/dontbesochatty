@@ -95,6 +95,12 @@ export default function Dashboard () {
                     className={classes.chatBox}
                     value={textValue}
                     onChange={e => changeTextValue(e.target.value)}
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 13) {
+                        sendChatAction({from: user, msg:textValue, topic: activeTopic});
+                        changeTextValue('');
+                      }
+                    }}
                 />
                 <Button 
                     variant="contained" 
