@@ -73,7 +73,7 @@ export default function Store(props) {
     }
 
     // just a workaround, do it better later. 
-    const user = 'Castro' + Math.random(100).toFixed(2)
+    const user = 'Anon' + Math.random(100).toFixed(2)
 
 
     // good luck as well 
