@@ -5,10 +5,8 @@ const analyzer = require('./services/toneAnalyzer');
 
 let messagesToAnalyze = [];
 
-const sendMessagesToAnalysis = async (msgs) => {
-  let analysis = "";
-  analysis = await analyzer.analyze(msgs.join('\n'));
-  console.log(analysis);
+const sendMessagesToAnalysis = (msgs) => {
+  return analyzer.analyze(msgs.join('\n'));
 }
 
 app.get('/', function(req, res){
@@ -17,15 +15,14 @@ app.get('/', function(req, res){
 
 // receives connection and broadcast when a new chat message is called from client
 io.on('connection', function(socket){
-    socket.on('chat message', function (msg) {
-        console.log('message: ' + JSON.stringify(msg, null, 4));
+    socket.on('chat message', async function (msg) {
         
         io.emit('chat message', msg);
         messagesToAnalyze.push(msg.msg);
 
         if (messagesToAnalyze.length % 5 == 0) {
-          console.log(messagesToAnalyze.join('\n'));
-          sendMessagesToAnalysis(messagesToAnalyze);
+          let analysis = await sendMessagesToAnalysis(messagesToAnalyze);
+          io.emit('tone analysis', analysis);
         }
     });
   });
