@@ -1,7 +1,13 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const analyzer = require('./services/toneAnalyzer');
 
+let messagesToAnalyze = [];
+
+const sendMessagesToAnalysis = (msgs) => {
+  return analyzer.analyze(msgs.join('\n'));
+}
 
 app.get('/', function(req, res){
   res.send('<h1>Felipe Megale, Guilherme Galvão, João Castro</h1>');
@@ -9,10 +15,16 @@ app.get('/', function(req, res){
 
 // receives connection and broadcast when a new chat message is called from client
 io.on('connection', function(socket){
-    socket.on('chat message', function (msg) {
-        console.log('message: ' + JSON.stringify(msg, null, 4));
+    socket.on('chat message', async function (msg) {
+        
         io.emit('chat message', msg);
-    })
+        messagesToAnalyze.push(msg.msg);
+
+        if (messagesToAnalyze.length % 5 == 0) {
+          let analysis = await sendMessagesToAnalysis(messagesToAnalyze);
+          io.emit('tone analysis', analysis);
+        }
+    });
   });
   
 
