@@ -14,22 +14,30 @@ import {CTX} from './Store';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: '50px',
-        padding: theme.spacing(3, 2),
+        //margin: '200px',
+        padding: theme.spacing(3, 10),
+        color: '#777',
+        background: '#B9D3EF',
+        marginLeft: '20%',
+        marginRight: '20%',
+        fontFamily: 'courier',
+        borderStyle: 'outset'
     },
     flex: {
         display: 'flex',
         alignItems: 'center'
     },
     topicsWindow: {
-        width: '30%',
+        width: '20%',
         height: '300px',
-        borderRight: '1px solid grey'
+        borderRight: '1px solid #777',
+        fontFamily: 'courier'
     },
     chatWindow: {
-        width: '70%',
-        height: '300px',
-        padding: '20px'
+        width: '50%',
+        height: '20px',
+        padding: '20px',
+        fontFamily: 'courier'
     },
     chatBox: {
         width: '85%'
@@ -37,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         width: '15%'
     }
-  }));
+}));
 
 export default function Dashboard () {
 
@@ -58,11 +66,9 @@ export default function Dashboard () {
     // good luck understanding this crap
     return( 
         <div>
+            <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />
             <Paper className={classes.root}>
-                <Typography variant="h4" component="h4">
-                    Don't be so Chatty
-                </Typography>
-                <Typography variant="h5" component="h5">
+                <Typography variant="h7" component="h7">
                     {activeTopic}
                 </Typography>
                 <div className={classes.flex}>
@@ -91,7 +97,7 @@ export default function Dashboard () {
                 </div>
                 <div className={classes.flex}>
                 <TextField
-                    label="Send a message"
+                    //label="Send a message"
                     className={classes.chatBox}
                     value={textValue}
                     onChange={e => changeTextValue(e.target.value)}
@@ -111,7 +117,7 @@ export default function Dashboard () {
                         changeTextValue('');
                     }}
                     >
-                        Send 
+                        Enviar 
                     </Button>
                 </div>
             </Paper>

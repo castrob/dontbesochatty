@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+/.vs/ProjectSettings.json
+/.vs/dontbesochatty-fix-3/v16/.suo
+/.vs/slnx.sqlite
