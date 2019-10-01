@@ -10,40 +10,43 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 
-import {CTX} from './Store';
+import { CTX } from './Store';
+import './chat-style.css';
 
 const useStyles = makeStyles(theme => ({
     root: {
         //margin: '200px',
         padding: theme.spacing(3, 10),
-        color: '#777',
-        background: '#B9D3EF',
+        color: '#000000',
+        background: '-webkit-linear-gradient(top, #7579ff, #B9D3EF)',
         marginLeft: '20%',
         marginRight: '20%',
-        fontFamily: 'courier',
-        borderStyle: 'outset'
+        fontFamily: 'Poppins-Regular',
+        borderRadius: '10px',
+        overflow: 'hidden',
+        marginbutton: '10%'
     },
     flex: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     topicsWindow: {
         width: '20%',
         height: '300px',
         borderRight: '1px solid #777',
-        fontFamily: 'courier'
+        fontFamily: 'Poppins-Regular'
     },
     chatWindow: {
-        width: '50%',
-        height: '20px',
-        padding: '20px',
-        fontFamily: 'courier'
+        width: '70%',
+        height: '300px',
+        padding: '20px'
+        
     },
     chatBox: {
-        width: '85%'
+        width: '85%',
     },
     button: {
-        width: '15%'
+        width: '15%',
     }
 }));
 
@@ -64,7 +67,20 @@ export default function Dashboard () {
     const [textValue, changeTextValue] = React.useState(''); // State to handle the send text action
 
     // good luck understanding this crap
-    return( 
+    return ( 
+        //<div class="limiter">
+        //        <div className="container-login100">
+        //            <div className="wrap-login100">
+                        //<div align='center'><img src="images/logo.png" alt="logo" id="logo" width='200' height='200' /></div>
+
+                        //<div className="wrap-input100 validate-input" data-validate="Informe seu usuário" >
+                        //    <input class="input100" type="text" name="username" id="txtUser" placeholder="Informe seu usuário"/></div>
+
+                        //    <div className="container-login100-form-btn" id="User">
+                        //        <input type="submit" class="login100-form-btn" value="Entrar" id="btnSalvar"/></div>
+        //            </div>
+        //        </div>
+        //</div>
         <div>
             <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />
             <Paper className={classes.root}>

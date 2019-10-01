@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('Poppins-Regular.ttf'); 
+}
 
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
@@ -16,4 +20,15 @@ div .chatWindow, .root {
 
 form {
     margin-top: 12px;
+}
+
+div .login {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: auto%;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+    border: 10px solid #d0d0d0
 }
