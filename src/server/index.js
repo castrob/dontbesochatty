@@ -20,6 +20,7 @@ io.on('connection', function(socket){
         io.emit('chat message', msg);
         messagesToAnalyze.push(msg.msg);
 
+          // TODO - Configurar para retornar mood: ANGRY
         if (messagesToAnalyze.length % 5 == 0) {
           let analysis = await sendMessagesToAnalysis(messagesToAnalyze);
           io.emit('tone analysis', analysis);

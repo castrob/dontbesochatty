@@ -8,9 +8,12 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { animateScroll } from "react-scroll";
+
 
 
 import {CTX} from './Store';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,16 +32,37 @@ const useStyles = makeStyles(theme => ({
     chatWindow: {
         width: '70%',
         height: '300px',
-        padding: '20px'
+        padding: '20px',
+        overflow: 'auto'
     },
     chatBox: {
         width: '85%'
     },
     button: {
         width: '15%'
+    },
+    chipAngry: {
+        borderColor: 'red'
+    },
+    chipJoy: {
+        borderColor: 'green'
+    },
+    chip: {
+        borderColor: 'white'
     }
   }));
 
+  // TODO - Esta função faz um switch nos moods disponiveis
+  function getChatClass(mood){
+      switch(mood){
+          case 'ANGRY':
+              return classes.chipAngry;
+          case 'JOY':
+              return classes.chipJoy;
+          default:
+              return classe.chip;
+      }
+  }
 export default function Dashboard () {
 
     // stuff for interface implementation
@@ -81,7 +105,7 @@ export default function Dashboard () {
                         {
                             allChats[activeTopic].map((chat, i) => (
                                 <div className={classes.flex} key={i}>
-                                    <Chip label={chat.from} className={classes.chip} />
+                                    <Chip label={chat.from} className={getChatClass(chat.mood)} /> {/* TODO - Configurar para enviar mood para funcao */}
                                     <Typography variant="body1" gutterBottom> {chat.msg} </Typography>
                                 </div>                    
                             ))
@@ -115,6 +139,6 @@ export default function Dashboard () {
                     </Button>
                 </div>
             </Paper>
-        </div> 
-    )
+        </div>
+    )    
 }

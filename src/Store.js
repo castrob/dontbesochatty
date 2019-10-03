@@ -8,7 +8,8 @@ export const CTX = React.createContext();
     msg {
         from: 'username'
         msg: 'hello'
-        topic: 'general'        
+        topic: 'general',
+        mood: 'ANGRY'     
     }
 
     state {
@@ -32,8 +33,8 @@ const initState = {
 
 // reducer must append new messages when receive_message is called as action
 function reducer(state, action) {
-
-    const {from, msg, topic} = action.payload;
+// TODO - COnfigurar para usar mood
+    const {from, msg, topic, mood} = action.payload;
 
     switch (action.type) {
         case 'RECEIVE_MESSAGE':
@@ -43,7 +44,8 @@ function reducer(state, action) {
                     ...state[topic],
                     {
                         from,
-                        msg
+                        msg,
+                        mood
                     }
                 ]
             }
