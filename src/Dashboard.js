@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { CTX } from './Store';
 import './chat-style.css';
+import Login from './Login';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -61,26 +62,13 @@ export default function Dashboard () {
     // List of topics that arrives from Context
     const topics = Object.keys(allChats); 
 
-    
     // local state
     const [activeTopic, changeActiveTopic] = React.useState(topics[0]); // Starts with the first topic as default (general)
     const [textValue, changeTextValue] = React.useState(''); // State to handle the send text action
 
     // good luck understanding this crap
     return ( 
-        //<div class="limiter">
-        //        <div className="container-login100">
-        //            <div className="wrap-login100">
-                        //<div align='center'><img src="images/logo.png" alt="logo" id="logo" width='200' height='200' /></div>
-
-                        //<div className="wrap-input100 validate-input" data-validate="Informe seu usuário" >
-                        //    <input class="input100" type="text" name="username" id="txtUser" placeholder="Informe seu usuário"/></div>
-
-                        //    <div className="container-login100-form-btn" id="User">
-                        //        <input type="submit" class="login100-form-btn" value="Entrar" id="btnSalvar"/></div>
-        //            </div>
-        //        </div>
-        //</div>
+        
         <div>
             <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />
             <Paper className={classes.root}>

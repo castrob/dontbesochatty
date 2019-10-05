@@ -28,3 +28,5 @@ package-lock.json
 /.vs/slnx.sqlite
 /src/Usuario.js
 /.vs/dontbesochatty-fix-3/config/applicationhost.config
+/src/background.js
+/.vs/VSWorkspaceState.json

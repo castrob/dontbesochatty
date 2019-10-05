@@ -22,6 +22,10 @@ class App extends Component {
         });
     }
 
+    //handleChange(evt) {
+    //    const user = evt.target.value;
+    //}
+
     render() {
         return (
             <div>
@@ -36,7 +40,6 @@ class App extends Component {
                 {this.state.showPopup ?
                     <Login
                         closePopup={this.togglePopup.bind(this)}
-                        
                     />
                      : null
                 }
