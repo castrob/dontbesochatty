@@ -10,7 +10,7 @@ const sendMessagesToAnalysis = (msgs) => {
 }
 
 app.get('/', function(req, res){
-  res.send('<h1>Felipe Megale, Guilherme Galvão, João Castro</h1>');
+  res.send('<h1>Felipe Megale, Guilherme Galvão, João Castro, Natália Miranda</h1>');
 });
 
 // receives connection and broadcast when a new chat message is called from client
@@ -22,7 +22,8 @@ io.on('connection', function(socket){
 
         if (messagesToAnalyze.length % 5 == 0) {
           let analysis = await sendMessagesToAnalysis(messagesToAnalyze);
-          io.emit('tone analysis', analysis);
+            io.emit('tone analysis', analysis);
+            alert(analysis);
         }
     });
   });

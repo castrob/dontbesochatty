@@ -10,34 +10,46 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 
-import {CTX} from './Store';
+import { CTX } from './Store';
+import './chat-style.css';
+import Login from './Login';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: '50px',
-        padding: theme.spacing(3, 2),
+        //margin: '200px',
+        padding: theme.spacing(3, 10),
+        color: '#000000',
+        background: '-webkit-linear-gradient(top, #7579ff, #B9D3EF)',
+        marginLeft: '20%',
+        marginRight: '20%',
+        fontFamily: 'Poppins-Regular',
+        borderRadius: '10px',
+        overflow: 'hidden',
+        marginbutton: '10%'
     },
     flex: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     topicsWindow: {
-        width: '30%',
+        width: '20%',
         height: '300px',
-        borderRight: '1px solid grey'
+        borderRight: '1px solid #777',
+        fontFamily: 'Poppins-Regular'
     },
     chatWindow: {
         width: '70%',
         height: '300px',
         padding: '20px'
+        
     },
     chatBox: {
-        width: '85%'
+        width: '85%',
     },
     button: {
-        width: '15%'
+        width: '15%',
     }
-  }));
+}));
 
 export default function Dashboard () {
 
@@ -50,19 +62,17 @@ export default function Dashboard () {
     // List of topics that arrives from Context
     const topics = Object.keys(allChats); 
 
-    
     // local state
     const [activeTopic, changeActiveTopic] = React.useState(topics[0]); // Starts with the first topic as default (general)
     const [textValue, changeTextValue] = React.useState(''); // State to handle the send text action
 
     // good luck understanding this crap
-    return( 
+    return ( 
+        
         <div>
+            <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />
             <Paper className={classes.root}>
-                <Typography variant="h4" component="h4">
-                    Don't be so Chatty
-                </Typography>
-                <Typography variant="h5" component="h5">
+                <Typography variant="h7" component="h7">
                     {activeTopic}
                 </Typography>
                 <div className={classes.flex}>
@@ -91,7 +101,7 @@ export default function Dashboard () {
                 </div>
                 <div className={classes.flex}>
                 <TextField
-                    label="Send a message"
+                    //label="Send a message"
                     className={classes.chatBox}
                     value={textValue}
                     onChange={e => changeTextValue(e.target.value)}
@@ -111,7 +121,7 @@ export default function Dashboard () {
                         changeTextValue('');
                     }}
                     >
-                        Send 
+                        Enviar 
                     </Button>
                 </div>
             </Paper>
