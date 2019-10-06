@@ -60,9 +60,10 @@ function sendChatAction(value) {
   socket.emit('chat message', value)
 }
 
+var user = '';
+
 function setUserAction(value) {
-  const user = value;
-  console.log(user);
+  user = value;
 }
 
 export default function Store(props) {
@@ -78,7 +79,7 @@ export default function Store(props) {
   }
 
   // just a workaround, do it better later.
-  const user = 'Anon' + Math.random(100).toFixed(2);
+  // const user = 'Anon' + Math.random(100).toFixed(2);
 
 
   // good luck as well

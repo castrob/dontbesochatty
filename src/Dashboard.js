@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { CTX } from './Store';
 import './chat-style.css';
-import Login from './Login';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,7 +65,6 @@ export default function Dashboard() {
   const [activeTopic, changeActiveTopic] = React.useState(topics[0]); // Starts with the first topic as default (general)
   const [textValue, changeTextValue] = React.useState(''); // State to handle the send text action
 
-  // good luck understanding this crap
   return (
     <div>
       <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />

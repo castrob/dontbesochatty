@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import './App.css';
 import './chat-style.css';
 // Imports
@@ -28,8 +27,8 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <Store>
-              <Dashboard />
               {this.state.showPopup ? <Login closePopup={this.togglePopup.bind(this)} /> : null}
+              <Dashboard />
             </Store>
           </header>
         </div>
