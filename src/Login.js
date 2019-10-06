@@ -18,11 +18,30 @@ export default function Popup(props) {
     <div className='popup'>
       <div className='popup_inner'>
         <div className='wrap-input100 validate-input' data-validate='Informe seu usuário' >
-          <TextField value={username} placeholder={"Username"} onChange={e => setUsername(e.target.value)} />
+          <TextField
+              value={username}
+              placeholder={"Username"}
+              autoFocus={true}
+              onKeyUp={(e) => {
+               if(e.keyCode === 13){
+                 setUserAction(username);
+                 console.log('wtf');
+                 closeModalHandler(props);
+               }
+              }}
+              onChange={e => setUsername(e.target.value)}
+          />
         </div>
 
         <div className='container-login100-form-btn' id='User' align='center'>
-          <button type='submit' className='login100-form-btn' value='Entrar' id='btnSalvar' onClick={() => { setUserAction(username); closeModalHandler(props); }}>Entrar</button>
+          <button type='submit'
+                  className='login100-form-btn'
+                  value='Entrar'
+                  id='btnSalvar'
+                  onClick={() => {
+                    setUserAction(username);
+                    closeModalHandler(props);
+                  }}>Entrar</button>
         </div>
 
       </div>

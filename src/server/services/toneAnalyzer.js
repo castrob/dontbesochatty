@@ -10,7 +10,7 @@ module.exports = {
     let requestData = {
       tone_input: {"text": textToAnalyze},
       content_type: "application/json"
-    }
+    };
 
     return toneAnalyzer.tone(requestData);
   }

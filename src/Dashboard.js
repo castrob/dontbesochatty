@@ -9,9 +9,12 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+import style from './style.css';
 
 import { CTX } from './Store';
 import './chat-style.css';
+export let messagesEnd;
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
   flex: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   topicsWindow: {
     width: '20%',
@@ -48,13 +51,65 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginLeft: '5px',
     width: '15%'
+  },
+  normal: {
+    width: '20%',
+    color: 'black'
+  },
+  joy: {
+    width: '20%',
+    backgroundColor: 'yellow'
+  },
+  angry: {
+    width: '20%',
+    backgroundColor: 'red'
+  },
+  sad: {
+    width: '20%',
+    backgroundColor: 'blue'
+  },
+  fear: {
+    width: '20%',
+    backgroundColor: 'purple'
+  },
+  text: {
+    textAlign: 'left',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  inputBox: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '10px'
   }
 }));
 
-export default function Dashboard() {
+
+export default function Dashboard(){
 
   // stuff for interface implementation
   const classes = useStyles();
+
+  const getTopicMood = () => {
+    console.log('currChat', JSON.stringify(allChats[activeTopic], null, 4));
+    let mood = allChats[activeTopic].mood;
+    switch(mood){
+      case 'sadness':
+        return classes.sad;
+      case 'joy':
+        return classes.joy;
+      case 'fear':
+        return classes.fear;
+      case 'anger':
+        return classes.angry;
+      default:
+        return classes.normal;
+    }
+  };
+  let messagesEnd;
+  const scrollToBottom = () =>{
+    messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
 
   // CTX Store
   const { allChats, sendChatAction, user } = React.useContext(CTX);
@@ -87,23 +142,29 @@ export default function Dashboard() {
           </div>
           <div className={classes.chatWindow}>
             {
-              allChats[activeTopic].map((chat, i) => (
-                <div className={classes.flex} key={i}>
-                  <Chip label={chat.from} className={classes.chip} />
-                  <Typography variant="body1" gutterBottom> {chat.msg} </Typography>
+              allChats[activeTopic].messages.map((chat, i) => (
+                <div  className={classes.text} key={i}>
+                  <Chip label={chat.from} className={getTopicMood()} />
+                    {
+                      chat.msg.split('\n').map ((item, i) => <Typography key={i}>{item}</Typography>)
+                    }
                 </div>
               ))
             }
+            <div style={{ float:"left", clear: "both" }}
+                 ref={(el) => { messagesEnd = el; }}>
+            </div>
           </div>
 
         </div>
-        <div className={classes.flex}>
+        <div  className={classes.inputBox}>
           <TextField
             className={classes.chatBox}
             value={textValue}
             onChange={e => changeTextValue(e.target.value)}
             onKeyUp={(e) => {
               if (e.keyCode === 13) {
+                scrollToBottom();
                 sendChatAction({ from: user, msg: textValue, topic: activeTopic });
                 changeTextValue('');
               }
@@ -119,6 +180,7 @@ export default function Dashboard() {
             }} > Enviar </Button>
         </div>
       </Paper>
+
     </div>
   )
 }
