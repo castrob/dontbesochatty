@@ -39,14 +39,15 @@ const useStyles = makeStyles(theme => ({
   chatWindow: {
     width: '70%',
     height: '300px',
-    padding: '20px'
-
+    padding: '20px',
+    overflow: 'auto'
   },
   chatBox: {
     width: '85%',
   },
   button: {
-    width: '15%',
+    marginLeft: '5px',
+    width: '15%'
   }
 }));
 

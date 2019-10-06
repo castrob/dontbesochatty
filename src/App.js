@@ -12,7 +12,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showPopup: true };
+    this.state = { showPopup: !sessionStorage.getItem('username') };
   }
 
   togglePopup() {

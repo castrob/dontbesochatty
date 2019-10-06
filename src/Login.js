@@ -18,7 +18,7 @@ export default function Popup(props) {
     <div className='popup'>
       <div className='popup_inner'>
         <div className='wrap-input100 validate-input' data-validate='Informe seu usuário' >
-          <TextField value={username} onChange={e => setUsername(e.target.value)} />
+          <TextField value={username} placeholder={"Username"} onChange={e => setUsername(e.target.value)} />
         </div>
 
         <div className='container-login100-form-btn' id='User' align='center'>

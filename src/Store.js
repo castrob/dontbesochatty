@@ -60,10 +60,11 @@ function sendChatAction(value) {
   socket.emit('chat message', value)
 }
 
-var user = '';
+var user = sessionStorage.getItem('username');
 
 function setUserAction(value) {
   user = value;
+  sessionStorage.setItem('username', user);
 }
 
 export default function Store(props) {
