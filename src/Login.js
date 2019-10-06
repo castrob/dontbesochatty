@@ -5,12 +5,11 @@ import style from './style.css';
 
 import { CTX } from './Store';
 
-function closeModalHandler() {
-
-  this.props.closePopup();
+function closeModalHandler(props) {
+  props.closePopup();
 }
 
-export default function Popup() {
+export default function Popup(props) {
 
   const [username, setUsername] = React.useState('');
   const { setUserAction } = React.useContext(CTX);
@@ -23,7 +22,7 @@ export default function Popup() {
         </div>
 
         <div className='container-login100-form-btn' id='User' align='center'>
-          <button type='submit' className='login100-form-btn' value='Entrar' id='btnSalvar' onClick={() => closeModalHandler()}>Entrar</button>
+          <button type='submit' className='login100-form-btn' value='Entrar' id='btnSalvar' onClick={() => { setUserAction(username); closeModalHandler(props); }}>Entrar</button>
         </div>
 
       </div>

@@ -71,7 +71,7 @@ export default function Dashboard() {
     <div>
       <img src="./logo.png" alt="logo" id="logo" width='200' height='200' />
       <Paper className={classes.root}>
-        <Typography variant="h7" component="h7">
+        <Typography variant="h6" component="h6">
           {activeTopic}
         </Typography>
         <div className={classes.flex}>

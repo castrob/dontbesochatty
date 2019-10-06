@@ -61,7 +61,8 @@ function sendChatAction(value) {
 }
 
 function setUserAction(value) {
-  console.log(value);
+  const user = value;
+  console.log(user);
 }
 
 export default function Store(props) {
@@ -82,7 +83,7 @@ export default function Store(props) {
 
   // good luck as well
   return (
-    <CTX.Provider value={{ allChats, sendChatAction, user }}>
+    <CTX.Provider value={{ allChats, sendChatAction, user, setUserAction }}>
       {props.children}
     </CTX.Provider>
   )
