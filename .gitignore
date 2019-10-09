@@ -33,3 +33,4 @@ package-lock.json
 /.vs/dontbesochatty-fix-3/config/applicationhost.config
 /src/background.js
 /.vs/VSWorkspaceState.json
+/.vs/dontbesochatty/v16/.suo

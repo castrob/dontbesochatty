@@ -9,8 +9,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
-import style from './style.css';
-
 import { CTX } from './Store';
 import './chat-style.css';
 export let messagesEnd;
