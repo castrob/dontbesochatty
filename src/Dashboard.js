@@ -68,7 +68,19 @@ const useStyles = makeStyles(theme => ({
   },
   fear: {
     width: '20%',
+    backgroundColor: 'green'
+  },
+  confident: {
+    width: '20%',
     backgroundColor: 'purple'
+  },
+  tentative: {
+    width: '20%',
+    backgroundColor: 'cyan'
+  },
+  analytical: {
+    width: '20%',
+    backgroundColor: 'blue'
   },
   text: {
     textAlign: 'left',
@@ -100,6 +112,12 @@ export default function Dashboard(){
         return classes.fear;
       case 'anger':
         return classes.angry;
+      case 'analytical':
+        return classes.analytical;
+      case 'confident':
+        return classes.confident;
+      case 'tentative':
+        return classes.tentative;
       default:
         return classes.normal;
     }

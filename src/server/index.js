@@ -20,10 +20,12 @@ app.get('/', function(req, res){
 // receives connection and broadcast when a new chat message is called from client
 io.on('connection', function(socket){
     socket.on('chat message', async function (msg) {
+        let sendMsg = true;
         messagesToAnalyze[msg.topic].push(msg.msg);
 
         if (messagesToAnalyze[msg.topic].length % 5 == 0) {
             // let mood = 'joy';
+            io.emit('chat message', msg);
             let analysis = await sendMessagesToAnalysis(messagesToAnalyze[msg.topic]);
             let accuracy = 0.0;
             analysis.document_tone.tones.map((tone) => {
@@ -31,12 +33,14 @@ io.on('connection', function(socket){
                     mood = tone.tone_id;
                 }
             });
-            console.log('Emit', JSON.stringify({mood: mood, topic: msg.topic}, null, 4));
+            // console.log('Emit', JSON.stringify({mood: mood, topic: msg.topic}, null, 4));
             io.emit('tone analysis', {'mood': mood, topic: msg.topic});
+            sendMsg = false;
             messagesToAnalyze[msg.topic] = [];
         }
-
-        io.emit('chat message', msg);
+        
+        if (sendMsg)
+          io.emit('chat message', msg);
     });
   });
   
